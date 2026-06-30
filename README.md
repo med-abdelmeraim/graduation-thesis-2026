@@ -94,7 +94,6 @@ Data files (local names):
 Because these files are large and derived from the CropNet dataset, **they are not committed to the Git repository**. Instead, we provide:
 
 - Small samples in `data/samples/`.
-- Scripts and instructions in `data/README.md` to download and preprocess the full dataset from Hugging Face and NOAA HRRR archives.[web:51][web:56][web:63]
 
 
 ## Compute environments
