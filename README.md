@@ -124,49 +124,7 @@ The CNN-GRU model was trained end-to-end on this machine due to its higher memor
 
 This split mirrors a realistic deployment scenario: heavy multi-modal models on dedicated GPU cloud, and compact weather-only models on more constrained platforms like Colab.
 
-## Quickstart
 
-### 1. Install dependencies
-
-```bash
-git clone https://github.com/<YOUR_USERNAME>/<YOUR_REPO_NAME>.git
-cd <YOUR_REPO_NAME>
-
-pip install -r requirements.txt
-# or use conda / poetry as you prefer
-```
-
-### 2. Prepare data
-
-1. Follow `data/README.md` to:
-   - Download the CropNet soybean subset from Hugging Face.[web:51]
-   - Download or access HRRR meteorological data (either via CropNet provided files or HRRR archives).[web:56][web:63]
-   - Generate `soybean_train.json`, `soybean_test.json`, and aligned HRRR + USDA CSVs.
-
-2. Place preprocessed data under `data/raw/` or configure paths in `config.py`.
-
-### 3. Train GraphCrossFormer (weather-only)
-
-```bash
-python -m src.training.train_graphcrossformer \
-    --config experiments/configs/graphcrossformer_default.yaml
-```
-
-- Adjust `--config` YAML to change states, years, and hyperparameters.
-
-### 4. Train CNN-GRU (multi-modal)
-
-```bash
-python -m src.training.train_cnn_gru \
-    --config experiments/configs/cnn_gru_default.yaml
-```
-
-- For Vast.ai, set `CUDA_VISIBLE_DEVICES` to the RTX 6000 GPU and confirm batch size and image resolution in the config.
-
-### 5. Evaluate and visualise
-
-```bash
-python -m src.evaluation.evaluate \
     --config experiments/configs/graphcrossformer_default.yaml
 
 python -m src.evaluation.grad_cam \
